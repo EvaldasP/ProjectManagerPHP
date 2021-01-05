@@ -1,0 +1,41 @@
+$primaryColor: #424949;
+$secondaryColor: #5dade2;
+
+body {
+  background-color: $primaryColor;
+}
+
+header {
+  margin-top: 30px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  a {
+    color: #5dade2;
+    margin-right: 10px;
+    margin-left: 30px;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  a:hover {
+    color: #58d68d;
+    text-decoration: none;
+  }
+  a:active {
+    color: #58d68d;
+  }
+}
+
+.logo {
+  display: flex;
+  margin-right: 30px;
+  align-items: center;
+  justify-content: center;
+  color: $secondaryColor;
+  img {
+    width: 70px;
+    margin-right: 10px;
+  }
+}
