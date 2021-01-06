@@ -1,9 +1,11 @@
 body {
   background-color: #424949;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 header {
   margin-top: 30px;
+  margin-bottom: 30px;
   height: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -46,11 +48,15 @@ header a:active {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  color: #5dade2;
+  color: #58d68d;
 }
 
 .logo img {
   width: 70px;
   margin-right: 10px;
+}
+
+th {
+  color: #58d68d;
 }
 /*# sourceMappingURL=styles.css.map */

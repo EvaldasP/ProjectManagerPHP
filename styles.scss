@@ -1,18 +1,22 @@
+//COLORS
 $primaryColor: #424949;
 $secondaryColor: #5dade2;
+$thirdColor: #58d68d;
 
 body {
   background-color: $primaryColor;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 header {
   margin-top: 30px;
+  margin-bottom: 30px;
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   a {
-    color: #5dade2;
+    color: $secondaryColor;
     margin-right: 10px;
     margin-left: 30px;
     font-size: 2rem;
@@ -20,11 +24,11 @@ header {
     transition: 0.3s;
   }
   a:hover {
-    color: #58d68d;
+    color: $thirdColor;
     text-decoration: none;
   }
   a:active {
-    color: #58d68d;
+    color: $thirdColor;
   }
 }
 
@@ -33,9 +37,15 @@ header {
   margin-right: 30px;
   align-items: center;
   justify-content: center;
-  color: $secondaryColor;
+  color: $thirdColor;
   img {
     width: 70px;
     margin-right: 10px;
   }
+}
+
+th {
+  color: $thirdColor;
+}
+.table {
 }
