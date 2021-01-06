@@ -46,39 +46,56 @@
             $servername = "localhost";
             $username = "root";
             $password = "mysql";
+            $db = "projectmanager";
 
             //Creating connection
 
-            $conn = mysqli_connect($servername, $username, $password);
+            $conn = mysqli_connect($servername, $username, $password, $db);
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
 
-            // Logika kuri pasikeitus path'ui pakecia spausdinama lentele
 
-            $table = "employee";
 
-            if ($_GET['path'] == "employee") {
-                $table = "employee";
+
+            //logika kuri pasikeitus path'ui keicia lentele kuri spausdinama
+
+            if ($_GET['path'] == "employee" || $_GET['path'] == "") {
+                $sql = "SELECT employee.id as nr, employee.name as vardas, projects.name as projektas 
+                FROM employee
+                LEFT JOIN projects ON employee.project_id = projects.id 
+                ORDER BY nr;";
+
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>
+                        <td> $row[nr]</td>
+                        <td> $row[vardas]</td>
+                        <td> $row[projektas]</td>
+                        </tr>";
+                    }
+                }
             } else if ($_GET['path'] == "projects") {
-                $table = "projects";
-            }
-
-
-
-            $sql = "SELECT id, name FROM projectmanager . $table";
-            $result = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>
-                    <td> $row[id] </td>
-                    <td> $row[name]</td>
-                    </tr>";
+                $sql = "SELECT id, name FROM projectmanager.projects";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>
+                        <td> $row[id]</td>
+                        <td> $row[name]</td>
+                        </tr>";
+                    }
                 }
             }
-
-
             mysqli_close($conn);
+
+
+
+
+
+
+
 
             ?>
         </tbody>
