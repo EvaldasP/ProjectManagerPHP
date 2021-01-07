@@ -7,8 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Tools/styles.css">
     <title>ProjectManagerPHP</title>
 </head>
 
@@ -23,7 +22,6 @@
             <h2>Projekto Valdymas</h2>
         </div>
     </header>
-
 
     <table class="table table-hover table-dark">
         <thead>
@@ -42,25 +40,19 @@
                     echo "<th scope=col> Projektai</th>";
                 }
                 ?>
+                <th scope="col">Action</th>
+
             </tr>
         </thead>
         <tbody>
 
             <?php
-
-            $servername = "localhost";
-            $username = "root";
-            $password = "mysql";
-            $db = "projectmanager";
-
-            //Creating connection
-
-            $conn = mysqli_connect($servername, $username, $password, $db);
-            if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
+            include "./Tools/helper.php";
 
             //logika kuri pasikeitus path'ui keicia lentele kuri spausdinama
+
+
+            // Darbuotoju Lentele
 
             if ($_GET['path'] == "employee" || $_GET['path'] == "") {
                 $sql = "SELECT employee.id as nr, employee.name as vardas, projects.name as projektas 
@@ -71,15 +63,23 @@
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>
-                        <td> $row[nr]</td>
-                        <td> $row[vardas]</td>
-                        <td> $row[projektas]</td>
-                        </tr>";
+
+                        print('<tr>'
+                            . '<td>' . $row['nr'] . '</td>'
+                            . '<td>' . $row['vardas'] . '</td>'
+                            . '<td>' . $row['projektas'] . '</td>'
+                            . '<td>' . '<a href="?action=deleteEmp&id='  . $row['nr'] . '"><button>DELETE</button></a>' .
+                            '<a href="?path=employee&updateEmp='  . rawurlencode($row['vardas']) . '"><button>UPDATE</button></a>'
+                            .  '</td>'
+                            . '</tr>');
                     }
                 }
+
+
+                // Project Lentele
+
             } else if ($_GET['path'] == "projects") {
-                $sql =  "SELECT projects.id as numeris, projects.name as projektas , GROUP_CONCAT(employee.name SEPARATOR', ') as vardas FROM projects
+                $sql =  "SELECT ANY_VALUE(projects.id) as numeris, projects.name as projektas , GROUP_CONCAT(employee.name SEPARATOR', ') as vardas FROM projects
                         LEFT JOIN employee ON employee.project_id = projects.id 
                         GROUP BY projektas
                         ORDER BY numeris;  
@@ -88,11 +88,14 @@
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>
-                        <td> $row[numeris]</td>
-                        <td> $row[projektas]</td>
-                        <td> $row[vardas] </td>
-                        </tr>";
+                        print('<tr>'
+                            . '<td>' . $row['numeris'] . '</td>'
+                            . '<td>' . $row['projektas'] . '</td>'
+                            . '<td>' . $row['vardas'] . '</td>'
+                            . '<td>' . '<a href="?action=deletePr&id='  . $row['numeris'] . '"><button>DELETE</button></a>' .
+                            '<a href="?path=projects&updatePr='  . rawurlencode($row['projektas']) . '"><button>UPDATE</button></a>'
+                            . '</td>'
+                            . '</tr>');
                     }
                 }
             }

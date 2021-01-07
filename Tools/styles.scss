@@ -47,5 +47,11 @@ header {
 th {
   color: $thirdColor;
 }
-.table {
+
+#updateForm {
+  display: flex;
+
+  input {
+    background-color: $primaryColor;
+  }
 }
