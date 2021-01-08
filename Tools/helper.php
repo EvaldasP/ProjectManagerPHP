@@ -50,28 +50,47 @@ if (isset($_GET['action']) and $_GET['action'] == 'deletePr') {
 
 
 
-// Darbuotoju updatinimas. Galima keisti varda
+// Darbuotoju updatinimas. Galima keisti varda Priskirti projekta
 
 if (isset($_GET['updateEmp'])) {
     $oldName = $_GET['updateEmp'];
     $id =  $_GET['id'];
 
-    $projektaiSql = "SELECT employee.project_id FROM employess ";
+    $projektaiSql = "SELECT projects.id as prId, projects.name as prPav 
+    FROM projects ";
     $projektaiResults = mysqli_query($conn, $projektaiSql);
 
+
+    // 
 
     echo
         "<form  id=updateForm method='POST'> 
     <label>Vardas</label>
     <input type='text' name='newName' value='$oldName' >
-    <input type='submit' name='updateEmp' value='Update'>
-    </form>";
+    <label>Projektas</label>
+    <Select class=form-control id=exampleFormControlSelect1 name='prId' >
+    <option selected disabled hidden>Projektai:</option>";
+
+    while ($row = mysqli_fetch_assoc($projektaiResults)) {
+        echo "<option  value=$row[prId] >$row[prPav]</option>";
+    }
+
+    echo
+        "
+        </Select>
+        <input type='submit' name='updateEmp' value='Update'>
+            </form>";
+
+
 
     if (isset($_POST['updateEmp'])) {
 
         $sql = "UPDATE employee 
-        SET employee.name ='$_POST[newName]' 
+        SET employee.name ='$_POST[newName]', employee.project_id ='$_POST[prId]'
         WHERE employee.id= '$id'";
+
+
+
 
         mysqli_query($conn, $sql);
 

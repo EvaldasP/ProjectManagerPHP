@@ -145,4 +145,9 @@ button {
 #updateBtn:hover {
   background-color: #21618c;
 }
+
+.form-control {
+  margin-bottom: 10px;
+  border: #21618c;
+}
 /*# sourceMappingURL=styles.css.map */
