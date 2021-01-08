@@ -54,10 +54,11 @@ if (isset($_GET['action']) and $_GET['action'] == 'deletePr') {
 
 if (isset($_GET['updateEmp'])) {
     $oldName = $_GET['updateEmp'];
+    $id =  $_GET['id'];
 
 
     echo
-        "<form  id=updateForma method='POST'> 
+        "<form  id=updateForm method='POST'> 
     <label>Vardas</label>
     <input type='text' name='newName' value= $oldName >
     <input type='submit' name='updateEmp' value='Update'>
@@ -67,7 +68,7 @@ if (isset($_GET['updateEmp'])) {
 
         $sql = "UPDATE employee 
         SET employee.name ='$_POST[newName]' 
-        WHERE employee.name= '$oldName'";
+        WHERE employee.id= '$id'";
 
         mysqli_query($conn, $sql);
 
@@ -86,33 +87,64 @@ if (isset($_GET['updateEmp'])) {
 
 if (isset($_GET['updatePr'])) {
 
-    $oldPrName = ($_GET['updatePr']);
-
-
-
+    $oldPrName = (($_GET['updatePr']));
+    rawurlencode($oldName);
+    $id =  $_GET['id'];
     echo
-        "<div>
-        <form  id=forma a method=post>
-        <label>Projecto pavadinimas</label>
-        <input type=text name='newPrName' value=$oldPrName> 
+        "
+        <form  id=updateForm method=post>
+        <label>Projekto pavadinimas</label>
+        <input type=text name='newPrName' value= $oldPrName> 
         <input type=submit name=updatePr value=Update>
         </form>
-        </div>";
-
-
-
-
+        ";
     if (isset($_POST['updatePr'])) {
         $sql = "UPDATE projects 
         SET projects.name ='$_POST[newPrName]' 
-        WHERE projects.name= '$oldPrName'";
-
+        WHERE projects.id= '$id'";
 
         mysqli_query($conn, $sql);
-
         header("Location: " . strtok("?path=projects", ''));
     }
 }
+
+
+
+// darbuotojo pridejimas
+
+if (isset($_POST['addNew'])) {
+
+    if ($_GET['path'] == "employee" || $_GET['path'] == "") {
+
+        $naujas  = $_POST['newEmp'];
+        $sql = "INSERT INTO employee (employee.name)
+        VALUES ('$naujas'); ";
+        mysqli_query($conn, $sql);
+        mysqli_close($conn);
+        header("Location: " . strtok("?path=employee", ''));
+
+
+        // Projekto pridejimas
+
+    } else if ($_GET['path'] == "projects") {
+        $naujas  = $_POST['newPr'];
+        $sql = "INSERT INTO projects (projects.name)
+        VALUES ('$naujas'); ";
+        mysqli_query($conn, $sql);
+        mysqli_close($conn);
+        header("Location: " . strtok("?path=projects", ''));
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 ?>

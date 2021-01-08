@@ -48,10 +48,69 @@ th {
   color: $thirdColor;
 }
 
-#updateForm {
-  display: flex;
+#updateForm,
+#addForm {
+  background-color: #212529;
+  width: 20%;
 
-  input {
-    background-color: $primaryColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40px;
+  margin-bottom: 40px;
+  text-align: center;
+  padding: 10px;
+  label {
+    color: $thirdColor;
+    font-size: 1.5rem;
   }
+  input {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: #212529;
+    border: none;
+    color: white;
+    border: solid 1px $secondaryColor;
+    padding: 5px;
+    outline: none;
+  }
+  input[type="submit"] {
+    padding: 10px;
+    background-color: $secondaryColor;
+
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  input[type="submit"]:hover {
+    background-color: $thirdColor;
+    border-color: $thirdColor;
+
+    cursor: pointer;
+  }
+}
+
+button {
+  cursor: pointer;
+  margin-right: 5px;
+  border: none;
+  padding: 5px;
+  color: white;
+}
+
+#updateBtn {
+  background-color: $secondaryColor;
+  transition: 0.3s;
+}
+#deleteBtn {
+  background-color: #e74c3c;
+  transition: 0.3s;
+}
+
+#deleteBtn:hover {
+  background-color: #c0392b;
+}
+#updateBtn:hover {
+  background-color: #21618c;
 }

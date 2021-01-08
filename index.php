@@ -23,8 +23,16 @@
         </div>
     </header>
 
+    <?php
+    include "./Tools/helper.php";
+    ?>
+
+
+
     <table class="table table-hover table-dark">
+
         <thead>
+
             <tr>
                 <th scope="col">ID</th>
 
@@ -44,10 +52,14 @@
 
             </tr>
         </thead>
+
+
         <tbody>
 
+
+
             <?php
-            include "./Tools/helper.php";
+
 
             //logika kuri pasikeitus path'ui keicia lentele kuri spausdinama
 
@@ -64,12 +76,14 @@
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
 
+                        $index++;
+
                         print('<tr>'
-                            . '<td>' . $row['nr'] . '</td>'
+                            . '<td>' . $index . '</td>'
                             . '<td>' . $row['vardas'] . '</td>'
                             . '<td>' . $row['projektas'] . '</td>'
-                            . '<td>' . '<a href="?action=deleteEmp&id='  . $row['nr'] . '"><button>DELETE</button></a>' .
-                            '<a href="?path=employee&updateEmp='  . rawurlencode($row['vardas']) . '"><button>UPDATE</button></a>'
+                            . '<td>' . '<a href="?action=deleteEmp&id='  . $row['nr'] . '"><button id=deleteBtn >DELETE</button></a>' .
+                            '<a href="?path=employee&updateEmp='  . rawurlencode($row['vardas']) . '&id=' . $row['nr'] . '"  ><button id=updateBtn >UPDATE</button></a>'
                             .  '</td>'
                             . '</tr>');
                     }
@@ -79,7 +93,8 @@
                 // Project Lentele
 
             } else if ($_GET['path'] == "projects") {
-                $sql =  "SELECT ANY_VALUE(projects.id) as numeris, projects.name as projektas , GROUP_CONCAT(employee.name SEPARATOR', ') as vardas FROM projects
+                $sql =  "SELECT ANY_VALUE(projects.id) as numeris, projects.name as projektas , GROUP_CONCAT(employee.name SEPARATOR', ') as vardas 
+                        FROM projects
                         LEFT JOIN employee ON employee.project_id = projects.id 
                         GROUP BY projektas
                         ORDER BY numeris;  
@@ -88,31 +103,53 @@
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+
+                        $index++;
+
                         print('<tr>'
-                            . '<td>' . $row['numeris'] . '</td>'
+                            . '<td>' . $index . '</td>'
                             . '<td>' . $row['projektas'] . '</td>'
                             . '<td>' . $row['vardas'] . '</td>'
-                            . '<td>' . '<a href="?action=deletePr&id='  . $row['numeris'] . '"><button>DELETE</button></a>' .
-                            '<a href="?path=projects&updatePr='  . rawurlencode($row['projektas']) . '"><button>UPDATE</button></a>'
+                            . '<td>' . '<a href="?action=deletePr&id='  . $row['numeris'] . '"><button id=deleteBtn>DELETE</button></a>' .
+                            '<a href="?path=projects&updatePr=' . rawurlencode($row['projektas']) . '&id=' . rawurlencode($row['numeris']) . '"><button id=updateBtn>UPDATE</button></a>'
                             . '</td>'
                             . '</tr>');
                     }
                 }
             }
             mysqli_close($conn);
-
-
-
-
-
-
-
-
             ?>
         </tbody>
     </table>
 
+    <?php
 
+    if ($_GET['path'] == "employee" || $_GET['path'] == "") {
+        echo "
+            <form  id=addForm method=post>
+            <label>Naujas Darbuotojas:</label>
+            <input type=text name='newEmp' > 
+            <input type=submit name='addNew' value=Add>
+            </form>
+        ";
+    } else if ($_GET['path'] == "projects") {
+        echo "
+        <form  id=addForm method=post>
+        <label>Naujas Projektas:</label>
+        <input type=text name='newPr' > 
+        <input type=submit name='addNew' value=Add>
+        </form>
+    ";
+    }
+
+
+
+
+
+
+
+
+    ?>
 
 
 

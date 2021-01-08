@@ -60,13 +60,89 @@ th {
   color: #58d68d;
 }
 
-#updateForm {
+#updateForm,
+#addForm {
+  background-color: #212529;
+  width: 20%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 40px;
+  margin-bottom: 40px;
+  text-align: center;
+  padding: 10px;
 }
 
-#updateForm input {
-  background-color: #424949;
+#updateForm label,
+#addForm label {
+  color: #58d68d;
+  font-size: 1.5rem;
+}
+
+#updateForm input,
+#addForm input {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  background-color: #212529;
+  border: none;
+  color: white;
+  border: solid 1px #5dade2;
+  padding: 5px;
+  outline: none;
+}
+
+#updateForm input[type="submit"],
+#addForm input[type="submit"] {
+  padding: 10px;
+  background-color: #5dade2;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+#updateForm input[type="submit"]:hover,
+#addForm input[type="submit"]:hover {
+  background-color: #58d68d;
+  border-color: #58d68d;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  margin-right: 5px;
+  border: none;
+  padding: 5px;
+  color: white;
+}
+
+#updateBtn {
+  background-color: #5dade2;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+#deleteBtn {
+  background-color: #e74c3c;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+#deleteBtn:hover {
+  background-color: #c0392b;
+}
+
+#updateBtn:hover {
+  background-color: #21618c;
 }
 /*# sourceMappingURL=styles.css.map */
