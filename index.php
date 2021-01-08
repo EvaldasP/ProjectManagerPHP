@@ -30,12 +30,9 @@
 
 
     <table class="table table-hover table-dark">
-
         <thead>
-
             <tr>
                 <th scope="col">ID</th>
-
                 <?php
                 if ($_GET['path'] == "employee") {
                     echo "<th scope=col>Vardas</th>";
@@ -49,11 +46,8 @@
                 }
                 ?>
                 <th scope="col">Action</th>
-
             </tr>
         </thead>
-
-
         <tbody>
 
 
@@ -111,7 +105,7 @@
                             . '<td>' . $row['projektas'] . '</td>'
                             . '<td>' . $row['vardas'] . '</td>'
                             . '<td>' . '<a href="?action=deletePr&id='  . $row['numeris'] . '"><button id=deleteBtn>DELETE</button></a>' .
-                            '<a href="?path=projects&updatePr=' . rawurlencode($row['projektas']) . '&id=' . rawurlencode($row['numeris']) . '"><button id=updateBtn>UPDATE</button></a>'
+                            '<a href="?path=projects&updatePr=' . $row['projektas'] . '&id=' . $row['numeris'] . '"><button id=updateBtn>UPDATE</button></a>'
                             . '</td>'
                             . '</tr>');
                     }
@@ -122,7 +116,11 @@
         </tbody>
     </table>
 
+
+
+
     <?php
+    // Formos nauju darbuotoju/project pridejimui
 
     if ($_GET['path'] == "employee" || $_GET['path'] == "") {
         echo "
@@ -141,24 +139,7 @@
         </form>
     ";
     }
-
-
-
-
-
-
-
-
     ?>
-
-
-
-
-
-
-
-
-
 
 
 

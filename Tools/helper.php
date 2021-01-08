@@ -56,11 +56,14 @@ if (isset($_GET['updateEmp'])) {
     $oldName = $_GET['updateEmp'];
     $id =  $_GET['id'];
 
+    $projektaiSql = "SELECT employee.project_id FROM employess ";
+    $projektaiResults = mysqli_query($conn, $projektaiSql);
+
 
     echo
         "<form  id=updateForm method='POST'> 
     <label>Vardas</label>
-    <input type='text' name='newName' value= $oldName >
+    <input type='text' name='newName' value='$oldName' >
     <input type='submit' name='updateEmp' value='Update'>
     </form>";
 
@@ -87,14 +90,15 @@ if (isset($_GET['updateEmp'])) {
 
 if (isset($_GET['updatePr'])) {
 
-    $oldPrName = (($_GET['updatePr']));
-    rawurlencode($oldName);
+    $oldPrName = ($_GET['updatePr']);
+
+
     $id =  $_GET['id'];
     echo
         "
         <form  id=updateForm method=post>
         <label>Projekto pavadinimas</label>
-        <input type=text name='newPrName' value= $oldPrName> 
+        <input type=text name='newPrName' value='$oldPrName' > 
         <input type=submit name=updatePr value=Update>
         </form>
         ";
@@ -102,8 +106,8 @@ if (isset($_GET['updatePr'])) {
         $sql = "UPDATE projects 
         SET projects.name ='$_POST[newPrName]' 
         WHERE projects.id= '$id'";
-
         mysqli_query($conn, $sql);
+        mysqli_close($conn);
         header("Location: " . strtok("?path=projects", ''));
     }
 }
