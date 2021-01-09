@@ -11,11 +11,11 @@ header {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 header a {
@@ -43,17 +43,27 @@ header a:active {
   display: flex;
   margin-right: 30px;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   color: #58d68d;
 }
 
 .logo img {
-  width: 70px;
+  width: 100px;
   margin-right: 10px;
+}
+
+.logo .textLogo {
+  text-align: center;
+  -webkit-transform: translateY(8px);
+          transform: translateY(8px);
+}
+
+.logo .textLogo h2 {
+  margin-bottom: 0px;
 }
 
 th {
@@ -69,15 +79,11 @@ th {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-left: 40px;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-bottom: 40px;
   text-align: center;
   padding: 10px;
@@ -148,6 +154,13 @@ button {
 
 .form-control {
   margin-bottom: 10px;
-  border: #21618c;
+}
+
+#update_add_forms {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 /*# sourceMappingURL=styles.css.map */

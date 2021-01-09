@@ -19,14 +19,47 @@
         </div>
         <div class="logo">
             <img src="./logo/project-management.svg" alt="">
-            <h2>Projekto Valdymas</h2>
+            <div class="textLogo">
+                <h2>Project Manager</h2>
+                <h2>PHP</h2>
+            </div>
         </div>
     </header>
 
-    <?php
-    include "./Tools/helper.php";
-    ?>
 
+
+
+    <div id=update_add_forms>
+        <?php
+        include "./Tools/helper.php";
+
+
+
+
+        // Formos nauju darbuotoju/project pridejimui
+
+        if ($_GET['path'] == "employee" || $_GET['path'] == "") {
+            echo "
+            <form  id=addForm method=post>
+            <label>Naujas Darbuotojas:</label>
+            <input type=text name='newEmp' > 
+            <input type=submit name='addNew' value=Add>
+            </form>
+        ";
+        } else if ($_GET['path'] == "projects") {
+            echo "
+        <form  id=addForm method=post>
+        <label>Naujas Projektas:</label>
+        <input type=text name='newPr' > 
+        <input type=submit name='addNew' value=Add>
+        </form>
+    ";
+        }
+
+
+
+        ?>
+    </div>
 
 
     <table class="table table-hover table-dark">
@@ -61,7 +94,7 @@
             // Darbuotoju Lentele
 
             if ($_GET['path'] == "employee" || $_GET['path'] == "") {
-                $sql = "SELECT employee.id as nr, employee.name as vardas, projects.name as projektas 
+                $sql = "SELECT employee.id as nr, employee.name as vardas, employee.project_id as prId, projects.name as projektas 
                 FROM employee
                 LEFT JOIN projects ON employee.project_id = projects.id 
                 ORDER BY nr;";
@@ -77,7 +110,7 @@
                             . '<td>' . $row['vardas'] . '</td>'
                             . '<td>' . $row['projektas'] . '</td>'
                             . '<td>' . '<a href="?action=deleteEmp&id='  . $row['nr'] . '"><button id=deleteBtn >DELETE</button></a>' .
-                            '<a href="?path=employee&updateEmp='  . rawurlencode($row['vardas']) . '&id=' . $row['nr'] . '"  ><button id=updateBtn >UPDATE</button></a>'
+                            '<a href="?path=employee&updateEmp='  . rawurlencode($row['vardas']) . '&id=' . $row['nr'] .   '&pr=' . $row['prId'] .  '"  ><button id=updateBtn >UPDATE</button></a>'
                             .  '</td>'
                             . '</tr>');
                     }
@@ -115,33 +148,6 @@
             ?>
         </tbody>
     </table>
-
-
-
-
-    <?php
-    // Formos nauju darbuotoju/project pridejimui
-
-    if ($_GET['path'] == "employee" || $_GET['path'] == "") {
-        echo "
-            <form  id=addForm method=post>
-            <label>Naujas Darbuotojas:</label>
-            <input type=text name='newEmp' > 
-            <input type=submit name='addNew' value=Add>
-            </form>
-        ";
-    } else if ($_GET['path'] == "projects") {
-        echo "
-        <form  id=addForm method=post>
-        <label>Naujas Projektas:</label>
-        <input type=text name='newPr' > 
-        <input type=submit name='addNew' value=Add>
-        </form>
-    ";
-    }
-    ?>
-
-
 
 </body>
 

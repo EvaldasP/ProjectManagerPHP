@@ -39,8 +39,15 @@ header {
   justify-content: center;
   color: $thirdColor;
   img {
-    width: 70px;
+    width: 100px;
     margin-right: 10px;
+  }
+  .textLogo {
+    text-align: center;
+    transform: translateY(8px);
+    h2 {
+      margin-bottom: 0px;
+    }
   }
 }
 
@@ -56,8 +63,7 @@ th {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  margin-left: 40px;
+
   margin-bottom: 40px;
   text-align: center;
   padding: 10px;
@@ -115,6 +121,11 @@ button {
   background-color: #21618c;
 }
 
-#prSelect {
+.form-control {
   margin-bottom: 10px;
+}
+
+#update_add_forms {
+  display: flex;
+  justify-content: space-around;
 }
