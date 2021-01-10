@@ -15,7 +15,7 @@ if (!$conn) {
 
 <?php
 
-// darbuotoju trinimas
+// darbuotoju trynimas
 
 if (isset($_GET['action']) and $_GET['action'] == 'deleteEmp') {
     $sql = 'DELETE FROM employee WHERE id = ?';
@@ -30,7 +30,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'deleteEmp') {
     die();
 }
 
-// projektu trinimas. Istrinus projekta darbuotuojai unsigned
+// projektu trynimas.
 
 if (isset($_GET['action']) and $_GET['action'] == 'deletePr') {
     $sql = 'DELETE FROM projects WHERE id = ?';
@@ -44,11 +44,6 @@ if (isset($_GET['action']) and $_GET['action'] == 'deletePr') {
     header("Location: " . strtok("?path=projects", ''));
     die();
 }
-
-
-
-
-
 
 // Darbuotoju updatinimas. Galima keisti varda/Priskirti projekta
 
@@ -68,32 +63,27 @@ if (isset($_GET['updateEmp'])) {
     <label>Vardas</label>
     <input type='text' name='newName' value='$oldName' >
     <label>Projektas</label>
-    <Select class=form-control id=exampleFormControlSelect1 name='prId'>
-    ";
+    <Select class=form-control id=exampleFormControlSelect1 name='prId'>";
 
-    //Spaudinami visi projektai kartu "nesasi" savo id 
+    //Spaudinami visi projektai kaip option. kartu "nesasi" savo id  kaip value
 
     while ($row = mysqli_fetch_assoc($projektaiResults)) {
         if ($pr == $row['empPrId']) {
             echo "<option selected=selected value=$row[prId] >$row[prPav]</option>";
             if ($pr == "") {
-                echo "<option selected=selected hidden >Pasirinkite Projekta:</option>";
+                echo "<option id=selectOption selected=selected hidden >Pasirinkite Projektą:</option>";
             }
         } else {
             echo "<option  value=$row[prId] >$row[prPav]</option>";
         }
     }
-
     if ($pr !== "") {
-        echo "<option  value=0 >----Iseiti is Projekto</option>";
+        echo "<option id=outOption  value=0 >Išeiti iš Projekto</option>";
     }
 
-
-    echo
-        "
-        </Select>
-        <input type='submit' name='updateEmp' value='Update'>
-        </form>";
+    echo "</Select>
+         <input type='submit' name='updateEmp' value='Update'>
+         </form>";
 
     if (isset($_POST['updateEmp'])) {
 
@@ -109,18 +99,12 @@ if (isset($_GET['updateEmp'])) {
             WHERE employee.id= '$id'";
         }
 
-
-
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         header("Location: " . strtok("?path=employee", ''));
+        die();
     }
 }
-
-
-
-
-
 
 
 // Projekto pavadinimo updatinimas
@@ -143,12 +127,9 @@ if (isset($_GET['updatePr'])) {
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         header("Location: " . strtok("?path=projects", ''));
+        die();
     }
 }
-
-
-
-
 
 
 // darbuotojo pridejimas
@@ -163,6 +144,7 @@ if (isset($_POST['addNew'])) {
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         header("Location: " . strtok("?path=employee", ''));
+        die();
 
 
         // Projekto pridejimas
@@ -174,6 +156,7 @@ if (isset($_POST['addNew'])) {
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         header("Location: " . strtok("?path=projects", ''));
+        die();
     }
 }
 ?>

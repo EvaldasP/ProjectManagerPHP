@@ -31,7 +31,7 @@ CREATE TABLE `employee` (
   PRIMARY KEY (`id`),
   KEY `project_id_idx` (`project_id`),
   CONSTRAINT `project_id` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Evaldas',3),(3,'Onute',1),(4,'Petras',3),(5,'Kazys',1),(6,'Jonas',2),(7,'Jonas',1),(65,'Henrikas',NULL),(66,'Bronislavas L',31),(67,'Antanas',NULL);
+INSERT INTO `employee` VALUES (1,'Evaldas',3),(3,'Onute',1),(4,'Petras',3),(5,'Kazys',1),(6,'Jonas',2),(65,'Henrikas',NULL),(67,'Antanas',NULL);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'FrontEnd Project'),(2,'BackEnd Project'),(3,'Design Project'),(30,'Testinis Projektas'),(31,'Java Projectas'),(32,'sss'),(33,'Testinis');
+INSERT INTO `projects` VALUES (1,'FrontEnd Project'),(2,'BackEnd Project'),(3,'Design Project'),(30,'Testinis Projektas'),(31,'Java Projektas');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -77,4 +77,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-09 17:58:42
+-- Dump completed on 2021-01-10 12:53:06

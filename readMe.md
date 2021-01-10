@@ -1,4 +1,4 @@
-## <center>Project Manager PHP</center>
+## Project Manager PHP
 
 ---
 
@@ -15,7 +15,7 @@ Download repository and upload to localhost folder
 
 - for example: \_C:\Program Files\Ampps\www\_
 
-Open MySQL Workbench connect localhost connection or create one
+Open MySQL Workbench connect to localhost connection or create one
 
 - with username "root"
 - password will be "mysql"
