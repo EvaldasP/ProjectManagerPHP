@@ -1,29 +1,33 @@
 ## Project Manager PHP
 
----
-
 ## Features
 
 - Create new employee
+
 - Create new project
+
 - Update employee/project
+
 - Delete employee/project
 
 # Installation
 
-Download repository and upload to localhost folder
+1.  Download repository and upload to localhost folder
 
-- for example: \_C:\Program Files\Ampps\www\_
+    - for example: \_C:\Program Files\Ampps\www\_
 
-Open MySQL Workbench connect to localhost connection or create one
+2.  Open MySQL Workbench connect to localhost connection or create one
 
-- with username "root"
-- password will be "mysql"
+    - with username "_root_"
 
-Now import sql file given in repository
+    - password will be "_mysql_"
 
-- Server--->Data Import
-- In Import Options Select "Import from Self-Contained File"
-- Press Start Import
+3.  Now import sql file given in repository
 
-It will create database called "projectmanager" with needed data
+    - Server--->Data Import
+
+    - In Import Options Select "_Import from Self-Contained File"_
+
+4.  Press Start Import
+
+    It will create database called "_projectmanager_" with needed data

@@ -65,7 +65,7 @@
     <table class="table table-hover table-dark">
         <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">Nr</th>
                 <?php
                 if ($_GET['path'] == "employee") {
                     echo "<th scope=col>Vardas</th>";

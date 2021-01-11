@@ -30,7 +30,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'deleteEmp') {
     die();
 }
 
-// projektu trynimas.
+// projektu trynimas
 
 if (isset($_GET['action']) and $_GET['action'] == 'deletePr') {
     $sql = 'DELETE FROM projects WHERE id = ?';
@@ -45,7 +45,7 @@ if (isset($_GET['action']) and $_GET['action'] == 'deletePr') {
     die();
 }
 
-// Darbuotoju updatinimas. Galima keisti varda/Priskirti projekta
+// Darbuotoju updatinimas. Galima keisti varda/Priskirti projekta/Iseiti is projekto
 
 if (isset($_GET['updateEmp'])) {
 
@@ -56,6 +56,7 @@ if (isset($_GET['updateEmp'])) {
     $projektaiSql = "SELECT DISTINCT projects.id as prId, projects.name as prPav, employee.project_id as empPrId
     FROM projects 
     LEFT JOIN  employee ON employee.project_id = projects.id ";
+
     $projektaiResults = mysqli_query($conn, $projektaiSql);
 
     echo
@@ -65,6 +66,9 @@ if (isset($_GET['updateEmp'])) {
     <label>Projektas</label>
     <Select class=form-control id=exampleFormControlSelect1 name='prId'>";
 
+    if ($pr == "") {
+        echo "<option id=selectOption selected=selected hidden >Pasirinkite Projektą:</option>";
+    }
     //Spaudinami visi projektai kaip option. kartu "nesasi" savo id  kaip value
 
     while ($row = mysqli_fetch_assoc($projektaiResults)) {
@@ -78,7 +82,7 @@ if (isset($_GET['updateEmp'])) {
         }
     }
     if ($pr !== "") {
-        echo "<option id=outOption  value=0 >Išeiti iš Projekto</option>";
+        echo "<option id=outOption  value=0 >--->Išeiti iš Projekto</option>";
     }
 
     echo "</Select>
