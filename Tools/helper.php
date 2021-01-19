@@ -60,7 +60,7 @@ if (isset($_GET['updateEmp'])) {
     $projektaiResults = mysqli_query($conn, $projektaiSql);
 
     echo
-        "<form  id=updateForm method='POST'> 
+    "<form  id=updateForm method='POST'> 
     <label>Vardas</label>
     <input type='text' name='newName' value='$oldName' >
     <label>Projektas</label>
@@ -95,7 +95,7 @@ if (isset($_GET['updateEmp'])) {
 
         if ($_POST['prId'] == 0) {
             $sql = "UPDATE employee 
-            SET employee.name ='$_POST[newName]', employee.project_id =NULL
+            SET employee.name ='$_POST[newName]', employee.project_id = NULL
             WHERE employee.id= '$id'";
         } else {
             $sql = "UPDATE employee 
@@ -103,7 +103,11 @@ if (isset($_GET['updateEmp'])) {
             WHERE employee.id= '$id'";
         }
 
+
+
+
         mysqli_query($conn, $sql);
+
         mysqli_close($conn);
         header("Location: " . strtok("?path=employee", ''));
         die();
@@ -117,7 +121,7 @@ if (isset($_GET['updatePr'])) {
     $oldPrName = ($_GET['updatePr']);
     $id =  $_GET['id'];
     echo
-        "
+    "
         <form  id=updateForm method=post>
         <label>Projekto pavadinimas</label>
         <input type=text name='newPrName' value='$oldPrName' > 
@@ -128,7 +132,12 @@ if (isset($_GET['updatePr'])) {
         $sql = "UPDATE projects 
         SET projects.name ='$_POST[newPrName]' 
         WHERE projects.id= '$id'";
-        mysqli_query($conn, $sql);
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $_POST['newPrName']);
+        $stmt->execute();
+        $stmt->close;
+
+
         mysqli_close($conn);
         header("Location: " . strtok("?path=projects", ''));
         die();
@@ -144,8 +153,11 @@ if (isset($_POST['addNew'])) {
 
         $naujas  = $_POST['newEmp'];
         $sql = "INSERT INTO employee (employee.name)
-        VALUES ('$naujas'); ";
-        mysqli_query($conn, $sql);
+        VALUES (?); ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $naujas);
+        $stmt->execute();
+        $stmt->close;
         mysqli_close($conn);
         header("Location: " . strtok("?path=employee", ''));
         die();
@@ -156,8 +168,12 @@ if (isset($_POST['addNew'])) {
     } else if ($_GET['path'] == "projects") {
         $naujas  = $_POST['newPr'];
         $sql = "INSERT INTO projects (projects.name)
-        VALUES ('$naujas'); ";
-        mysqli_query($conn, $sql);
+        VALUES (?); ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $naujas);
+        $stmt->execute();
+        $stmt->close;
         mysqli_close($conn);
         header("Location: " . strtok("?path=projects", ''));
         die();
